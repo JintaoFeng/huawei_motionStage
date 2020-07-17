@@ -17,17 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     axis.cpp \
+    lightbutton.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     axis.h \
     gts.h \
+    lightbutton.h \
     mainwindow.h
 
 FORMS += \
     axis.ui \
     mainwindow.ui
+RC_ICONS = Resources/logo.ico
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -44,5 +47,7 @@ DEPENDPATH += $$PWD/.
 #LIBS += gts.lib
 
 DISTFILES += \
+    Resources/UPLogo.jpg \
+    Resources/logo.ico \
     gts.dll \
     gts.lib

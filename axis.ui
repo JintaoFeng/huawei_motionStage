@@ -37,531 +37,9 @@
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2" rowstretch="2,2,2,0" columnstretch="2,2">
+  <layout class="QGridLayout" name="gridLayout_2" rowstretch="2,2,2" columnstretch="2,2">
    <item row="0" column="0">
-    <widget class="QGroupBox" name="control">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="title">
-      <string>控制参数</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3" columnstretch="1,2,2,1">
-      <item row="2" column="1">
-       <widget class="QLabel" name="kdLabel">
-        <property name="text">
-         <string>KD：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QTextEdit" name="kiText">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QTextEdit" name="kpText">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="kiLabel">
-        <property name="text">
-         <string>KI：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLabel" name="forwardLabel">
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>前馈：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="kpLabel">
-        <property name="text">
-         <string>KP：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QTextEdit" name="kdText">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QTextEdit" name="forwardText">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="2" column="0">
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QGroupBox" name="Traj">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="title">
-      <string>Traj</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout" columnstretch="1,2,2,1">
-      <item row="1" column="3">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLabel" name="killAccLabel">
-        <property name="text">
-         <string>killDec:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="accLabel">
-        <property name="text">
-         <string>加速度：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QTextEdit" name="velText">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QTextEdit" name="jerkText">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QTextEdit" name="accText">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QTextEdit" name="killAccText">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="tabChangesFocus">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="jerkLabel">
-        <property name="text">
-         <string>加加速度:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="velLabel">
-        <property name="text">
-         <string>速度：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QGroupBox" name="relative">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="title">
-      <string>Relative</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_4">
-      <item row="1" column="1">
-       <widget class="QPushButton" name="relativeStart">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>17</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>start</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QTextEdit" name="relativeText">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="relativeRep">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Repetitive</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QPushButton" name="jogBack">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>14</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Jog-</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QPushButton" name="jogForward">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>14</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Jog+</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QGroupBox" name="absolute">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="title">
-      <string>Absolute</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="0" column="0">
-       <widget class="QTextEdit" name="absolutePosText">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="absoluteRep">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Repetitive</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QTextEdit" name="absolutePosText2">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="absoluteStart">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>17</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>start</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QGroupBox" name="feedback">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="title">
-      <string>Feedback</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_6" columnstretch="1,2,2,1,0">
-      <item row="2" column="1">
-       <widget class="QLabel" name="errorLabel">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>误差：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <spacer name="horizontalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="fvelLabel">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>速度：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4">
-       <spacer name="horizontalSpacer_6">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="fposLabel">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>位置：</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2" colspan="2">
-       <widget class="QTextEdit" name="fposText">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2" colspan="2">
-       <widget class="QTextEdit" name="velText_2">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2" colspan="2">
-       <widget class="QTextEdit" name="errorText">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QGroupBox" name="groupBox_3">
+    <widget class="QGroupBox" name="Btn">
      <property name="font">
       <font>
        <pointsize>12</pointsize>
@@ -676,6 +154,555 @@
         </property>
         <property name="text">
          <string>HOME</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="feedback">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="title">
+      <string>Feedback</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6" columnstretch="1,3,3">
+      <item row="0" column="1">
+       <widget class="QLabel" name="encLabel">
+        <property name="text">
+         <string>Encoder</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="prfLabel">
+        <property name="text">
+         <string>profile</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="fposLabel">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>pos：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="fvelLabel">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>vel：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="accLabel_2">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>acc:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="errorLabel">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>error:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="prfPosText">
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="fposText">
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLineEdit" name="prfVelText">
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLineEdit" name="prfAccText">
+        <property name="maximumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="faccText">
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="fvelText">
+        <property name="maximumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="errorText">
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="Traj">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="title">
+      <string>Traj</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout" columnstretch="1,2,2,1">
+      <item row="1" column="3">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="killAccLabel">
+        <property name="text">
+         <string>killDec:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="accLabel">
+        <property name="text">
+         <string>加速度：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="smoothLabel">
+        <property name="text">
+         <string>平滑时间:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="velLabel">
+        <property name="text">
+         <string>速度：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="velText">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>10</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="accText">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>10</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLineEdit" name="smoothTimeText">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLineEdit" name="killDecText">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1000</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="Status">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="title">
+      <string>Status</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3" columnstretch="0"/>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QGroupBox" name="absolute">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="title">
+      <string>Absolute</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="1" column="0">
+       <widget class="QLineEdit" name="absolutePosText">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="absoluteRep">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Repetitive</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="absoluteStart">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>17</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>start</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLineEdit" name="absolutePosText2">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="relative">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="title">
+      <string>Relative</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="1" column="1">
+       <widget class="QPushButton" name="relativeStart">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>17</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>start</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="relativeRep">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Repetitive</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="jogBack">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Jog-</string>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="jogForward">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Jog+</string>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLineEdit" name="relativeEdit">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>0</string>
         </property>
        </widget>
       </item>

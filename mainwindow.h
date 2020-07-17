@@ -6,6 +6,8 @@
 #include <QString>
 #include <QDebug>
 #include "axis.h"
+#include <QThread>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -35,6 +37,11 @@ private:
     axis* axis2;
     axis* axis3;
 
-
+signals:
+    void axis1Init();
+    void axis2Init();
+    void axis3Init();
+    void updateStart();
+    void updateTerm();
 };
 #endif // MAINWINDOW_H
