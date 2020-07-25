@@ -30,13 +30,28 @@ private slots:
 
     void on_cfgBtn_clicked();
 
+    void on_killStopBtn_clicked();
+
+    void on_enableAllBtn_clicked();
+
+    void on_homeAll_clicked();
+
 private:
     Ui::MainWindow *ui;
     int retValue;
     axis* axis1;
     axis* axis2;
     axis* axis3;
+    long axisStatus1;
+    long axisStatus2;
+    long axisStatus3;
+    QThread *homeThread1;
+    QThread *homeThread2;
+    QThread *homeThread3;
 
+    Home *home1;
+    Home *home2;
+    Home *home3;
 signals:
     void axis1Init();
     void axis2Init();

@@ -129,6 +129,9 @@ public slots:
     void start();
 private:
     THomeStatus tHomeSta;
+    THomeStatus tHomeSta1;
+    THomeStatus tHomeSta2;
+    THomeStatus tHomeSta3;
     THomePrm tHomePrm;
 signals:
     void workFinished();

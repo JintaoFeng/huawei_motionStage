@@ -400,7 +400,7 @@ void LightButton::setGray()
 void LightButton::setBlue()
 {
     textColor = QColor(255, 255, 255);
-    setBgColor(QColor(0, 0, 166));
+    setBgColor(QColor(100, 184, 255));
 }
 
 void LightButton::setLightBlue()

@@ -1,6 +1,7 @@
 #include "axis.h"
 #include "ui_axis.h"
 #include "mainwindow.h"
+#include <QMutex>
 axis::axis(QWidget *parent,QString name) :
     QWidget(parent),
     ui(new Ui::axis),absoluteThread(nullptr),absoluteMove(nullptr)
@@ -91,18 +92,70 @@ void axis::on_enableBtn_clicked()
 {
     if(objectName()=="Axis1")
     {
-        retValue=GT_AxisOn(1);
-        commandHandle("Axis1 Enable",retValue);
+        GT_GetSts(1,&axisStatus);
+        if(axisStatus&0x200)
+        {
+            retValue=GT_AxisOff(1);
+            if(!retValue)
+            {
+                ui->enableBtn->setText("Enable");
+            }
+            commandHandle("Axis1 Enable off",retValue);
+        }
+        else
+        {
+            retValue=GT_AxisOn(1);
+            commandHandle("Axis1 Enable on",retValue);
+            if(!retValue)
+            {
+                ui->enableBtn->setText("Disable");
+            }
+        }
+
     }
     else if(objectName()=="Axis2")
     {
-        retValue=GT_AxisOn(2);
-        commandHandle("Axis2 Enable",retValue);
+        GT_GetSts(2,&axisStatus);
+        if(axisStatus&0x200)
+        {
+            retValue=GT_AxisOff(2);
+            if(!retValue)
+            {
+                ui->enableBtn->setText("Enable");
+            }
+            commandHandle("Axis2 Enable off",retValue);
+        }
+        else
+        {
+            retValue=GT_AxisOn(2);
+            commandHandle("Axis2 Enable on",retValue);
+            if(!retValue)
+            {
+                ui->enableBtn->setText("Disable");
+            }
+        }
     }
     else if(objectName()=="Axis3")
     {
-        retValue=GT_AxisOn(3);
-        commandHandle("Axis3 Enable",retValue);
+        GT_GetSts(3,&axisStatus);
+        if(axisStatus&0x200)
+        {
+            retValue=GT_AxisOff(3);
+            if(!retValue)
+            {
+                ui->enableBtn->setText("Enable");
+            }
+            commandHandle("Axis3 Enable off",retValue);
+        }
+        else
+        {
+            retValue=GT_AxisOn(3);
+            commandHandle("Axis3 Enable on",retValue);
+            if(!retValue)
+            {
+                ui->enableBtn->setText("Disable");
+            }
+        }
     }
     else if(objectName()==nullptr)
     {
@@ -160,7 +213,6 @@ void axis::timerOut()
     ui->prfAccText->setText(QString("%1").arg(prfAcc,3,'f',1));
     if(axisStatus&0x02)
     {
-        qDebug()<<"伺服报警"<<endl;
         this->alarmBtn->setRed();
     }
     else
@@ -194,10 +246,12 @@ void axis::timerOut()
     if(axisStatus&0x200)
     {
         this->enableBtn2->setRed();
+        ui->enableBtn->setText("Disable");
     }
     else
     {
         this->enableBtn2->setBlue();
+        ui->enableBtn->setText("Enable");
     }
     if(axisStatus&0x400)
     {
@@ -313,16 +367,19 @@ void axis::on_clearBtn_clicked()
     if(objectName()=="Axis1")
     {
         retValue=GT_ClrSts(1,1);
+    //    GT_SetDoBitReverse(MC_CLEAR,1,0,2);
         commandHandle("Axis1 Clear warning",retValue);
     }
     else if(objectName()=="Axis2")
     {
         retValue=GT_ClrSts(2,1);
+   //     GT_SetDoBitReverse(MC_CLEAR,2,1,1);
         commandHandle("Axis2 Clear warning",retValue);
     }
     else if(objectName()=="Axis3")
     {
         retValue=GT_ClrSts(3,1);
+   //     GT_SetDoBitReverse(MC_CLEAR,3,1,1);
         commandHandle("Axis3 Clear warning",retValue);
     }
     else if(objectName()==nullptr)
@@ -350,6 +407,10 @@ void axis::on_jogForward_pressed()
         jogPrm.acc=ui->accText->text().toDouble();
         jogPrm.dec=ui->accText->text().toDouble();
         jogPrm.smooth=ui->smoothTimeText->text().toDouble();
+        if(jogPrm.smooth>=1)
+        {
+            jogPrm.smooth=0.9;
+        }
         retValue=GT_SetJogPrm(1,&jogPrm);
         commandHandle("Axis1 set prm",retValue);
         GT_SetVel(1,ui->velText->text().toDouble());
@@ -364,6 +425,10 @@ void axis::on_jogForward_pressed()
         jogPrm.acc=ui->accText->text().toDouble();
         jogPrm.dec=ui->accText->text().toDouble();
         jogPrm.smooth=ui->smoothTimeText->text().toDouble();
+        if(jogPrm.smooth>=1)
+        {
+            jogPrm.smooth=0.9;
+        }
         retValue=GT_SetJogPrm(2,&jogPrm);
         GT_SetVel(2,ui->velText->text().toDouble());
         GT_SetStopDec(2,jogPrm.dec,ui->killDecText->text().toDouble());
@@ -377,6 +442,10 @@ void axis::on_jogForward_pressed()
         jogPrm.acc = ui->accText->text().toDouble();
         jogPrm.dec = ui->accText->text().toDouble();
         jogPrm.smooth = ui->smoothTimeText->text().toDouble();
+        if(jogPrm.smooth>=1)
+        {
+            jogPrm.smooth=0.9;
+        }
         GT_SetJogPrm(3,&jogPrm);
         retValue = GT_SetVel(3,ui->velText->text().toDouble());
         GT_SetStopDec(3,jogPrm.dec,ui->killDecText->text().toDouble());
@@ -398,6 +467,10 @@ void axis::on_jogBack_pressed()
         jogPrm.acc=ui->accText->text().toDouble();
         jogPrm.dec=ui->accText->text().toDouble();
         jogPrm.smooth=ui->smoothTimeText->text().toDouble();
+        if(jogPrm.smooth>=1)
+        {
+            jogPrm.smooth=0.9;
+        }
         GT_SetJogPrm(1,&jogPrm);
         GT_SetVel(1,-1*ui->velText->text().toDouble());
         GT_SetStopDec(1,jogPrm.dec,ui->killDecText->text().toDouble());
@@ -411,6 +484,10 @@ void axis::on_jogBack_pressed()
         jogPrm.acc=ui->accText->text().toDouble();
         jogPrm.dec=-1*ui->accText->text().toDouble();
         jogPrm.smooth=ui->smoothTimeText->text().toDouble();
+        if(jogPrm.smooth>=1)
+        {
+            jogPrm.smooth=0.9;
+        }
         GT_SetJogPrm(2,&jogPrm);
         GT_SetStopDec(2,jogPrm.dec,ui->killDecText->text().toDouble());
         GT_SetVel(2,-1*ui->velText->text().toDouble());
@@ -424,6 +501,10 @@ void axis::on_jogBack_pressed()
         jogPrm.acc=ui->accText->text().toDouble();
         jogPrm.dec=ui->accText->text().toDouble();
         jogPrm.smooth=ui->smoothTimeText->text().toDouble();
+        if(jogPrm.smooth>=1)
+        {
+            jogPrm.smooth=0.9;
+        }
         GT_SetJogPrm(3,&jogPrm);
         retValue=GT_SetVel(3,-1*ui->velText->text().toDouble());
         GT_SetStopDec(3,jogPrm.dec,ui->killDecText->text().toDouble());
@@ -481,7 +562,7 @@ void axis::absoluteThreadFinished()
 {
     absoluteMove=nullptr;
     absoluteThread=nullptr;
-    qDebug()<<absoluteMove<<absoluteThread<<endl;
+//    qDebug()<<absoluteMove<<absoluteThread<<endl;
 }
 
 void axis::on_absoluteStart_clicked()
@@ -502,7 +583,6 @@ void axis::on_absoluteStart_clicked()
     connect(absoluteMove,&AbsoluteMove::workFinshed,[this](){
         absoluteThread->quit();
    //     absoluteThread->wait();
-     //   qDebug()<<"hehe"<<endl;
     });
     absoluteThread->start();
 
@@ -613,28 +693,46 @@ Home::Home(QObject* parent):QObject(parent)
 void Home::doWorks(short axis)
 {
     int retValue;
+    static QMutex mutex;
     retValue=1;
-    qDebug()<<"work!!"<<endl;
-    qDebug()<<QThread::currentThreadId()<<QThread::currentThread()<<endl;
+//    QMutexLocker locker(&mutex);
+
     retValue = GT_GetHomePrm(axis,&tHomePrm);
-    tHomePrm.mode=12;
+    tHomePrm.mode=11;
     tHomePrm.moveDir=-1;
     tHomePrm.indexDir=1;
     tHomePrm.edge=0;
     tHomePrm.triggerIndex=axis;
     tHomePrm.velHigh=5;
-    tHomePrm.velLow=1;
+    tHomePrm.velLow=4;
     tHomePrm.acc=0.1;
     tHomePrm.dec=0.1;
     tHomePrm.searchHomeDistance=200000;
     tHomePrm.searchIndexDistance=30000;
     tHomePrm.escapeStep=1000;
+    tHomePrm.pad2[1]=1;
+    if(axis==1)
+    {
+        tHomePrm.velHigh=10;
+        tHomePrm.velLow=8;
+        tHomePrm.homeOffset=-124000;
+    }
+    else if(axis==2)
+    {
+        tHomePrm.homeOffset=-30000;
+    }
+    else if(axis==3)
+    {
+        tHomePrm.homeOffset=-31000;
+    }
+
     retValue = GT_GoHome(axis,&tHomePrm);
     do
     {
         GT_GetHomeStatus(axis,&tHomeSta);
-        QThread::msleep(1);
     }while(tHomeSta.run);
+    GT_ClrSts(axis);
+    GT_ZeroPos(axis);
 
     emit workFinished();
 }
@@ -650,7 +748,6 @@ void Home::start()
 void axis::on_homeBtn_clicked()
 {
     homeThread=new QThread;
-    QThread thread;
     home=new Home;
     home->moveToThread(homeThread);
 
@@ -660,10 +757,8 @@ void axis::on_homeBtn_clicked()
     connect(home,&Home::destroyed,homeThread,&QThread::deleteLater);
     connect(home,&Home::workFinished,[this](){
         homeThread->quit();
-        homeThread->wait();
+   //     homeThread->wait();
     });
-
-    qDebug()<<QThread::currentThreadId()<<QThread::currentThread()<<endl;
     homeThread->start();
     if(objectName()=="Axis1")
     {
@@ -696,7 +791,7 @@ void axis::on_relativeStart_clicked()
     connect(realtiveMove,&AbsoluteMove::destroyed,realtiveThread,&QThread::deleteLater);
 
     connect(this,&axis::moveStop,realtiveMove,&RealtiveMove::moveStop,Qt::DirectConnection);
-    connect(realtiveThread,&QThread::destroyed,this,&axis::absoluteThreadFinished);
+//    connect(realtiveThread,&QThread::destroyed,this,&axis::absoluteThreadFinished);
 
     connect(realtiveMove,&RealtiveMove::workFinshed,[this](){
         realtiveThread->quit();
@@ -716,7 +811,8 @@ void axis::on_relativeStart_clicked()
   //      commandHandle("axis1 setVel",retValue);
         GT_GetPos(1,&pPos);
         rep=ui->relativeRep->checkState();
-        emit realtive(1,pPos,ui->absolutePosText->text().toInt(),rep);
+     //   qDebug()<<pPos<<endl;
+        emit realtive(1,pPos,ui->relativeEdit->text().toInt(),rep);
     }
     else if(objectName()=="Axis2")
     {
@@ -727,9 +823,10 @@ void axis::on_relativeStart_clicked()
         GT_PrfTrap(2);
         GT_SetTrapPrm(2,&trapPrm);
         retValue=GT_SetVel(2,ui->velText->text().toDouble());
-        commandHandle("axis1 setVel",retValue);
-        rep=ui->absoluteRep->checkState();
-        emit absolute(2,ui->absolutePosText2->text().toInt(),ui->absolutePosText->text().toInt(),rep);
+        commandHandle("axis2 setVel",retValue);
+        GT_GetPos(2,&pPos);
+
+
     }
     else if(objectName()=="Axis3")
     {
@@ -740,9 +837,11 @@ void axis::on_relativeStart_clicked()
         GT_PrfTrap(3);
         GT_SetTrapPrm(3,&trapPrm);
         retValue=GT_SetVel(3,ui->velText->text().toDouble());
-        commandHandle("axis1 setVel",retValue);
-        rep=ui->absoluteRep->checkState();
-        emit absolute(3,ui->absolutePosText2->text().toInt(),ui->relativeEdit->text().toInt(),rep);
+        commandHandle("axis3 setVel",retValue);
+        GT_GetPos(3,&pPos);
+        rep=ui->relativeRep->checkState();
+    //    qDebug()<<pPos<<endl;
+        emit realtive(3,pPos,ui->relativeEdit->text().toInt(),rep);
     }
     else if(objectName()==nullptr)
     {
@@ -754,6 +853,7 @@ void RealtiveMove::doWorks(short profile,int start,int end,int rep)
 {
     long mask=long(1<<(profile-1));
     end+=start;
+//    qDebug()<<rep<<endl;
     do
     {
         GT_SetPos(profile,end);

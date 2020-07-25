@@ -51,3 +51,6 @@ DISTFILES += \
     Resources/logo.ico \
     gts.dll \
     gts.lib
+
+RESOURCES += \
+    logo.qrc

@@ -9,12 +9,14 @@
 #include <QThread>
 #include <QImage>
 #include <QDir>
+#include "lightbutton.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QLibrary lib("gts.lib");
+//    QLibrary lib("gts.lib");
+
 
     this->setWindowTitle("MotionStage");
     axis1=new axis(this,"Axis1");
@@ -72,6 +74,18 @@ void MainWindow::ShowTime()
 {
     ui->timeNumber->display(QDateTime::currentDateTime().toString("hh:mm:ss"));
     ui->dataNumber->display(QDateTime::currentDateTime().toString("yyyy.MM.dd"));
+
+    GT_GetSts(1,&axisStatus1);
+    GT_GetSts(2,&axisStatus2);
+    GT_GetSts(3,&axisStatus3);
+    if(axisStatus1&0x200 && axisStatus2&0x200 && axisStatus3&0x200)
+    {
+        ui->enableAllBtn->setText("Disable");
+    }
+    else
+    {
+        ui->enableAllBtn->setText("Enable");
+    }
 }
 
 void MainWindow::CommandHandler(QString command, int value)
@@ -91,19 +105,23 @@ void MainWindow::CommandHandler(QString command, int value)
 
 void MainWindow::on_openBtn_clicked()
 {
- //   CommandHandler("open",retValue);
     retValue=GT_Open();
     CommandHandler("open",retValue);
     if(~retValue)
     {
-     //   axis1->uiInit();
-    //    axis2->uiInit();
-      //  axis3->uiInit();
         emit axis1Init();
         emit axis2Init();
         emit axis3Init();
         emit updateStart();
     }
+    QString str= "..\\googolMotion\\GTS800.cfg";
+    QByteArray temp=str.toLatin1();
+    char* file=temp.data();
+    retValue=GT_LoadConfig(file);
+    CommandHandler("load config",retValue);
+    GT_ClrSts(1);
+    GT_ClrSts(2);
+    GT_ClrSts(3);
 }
 
 void MainWindow::on_closeBtn_clicked()
@@ -124,4 +142,94 @@ void MainWindow::on_cfgBtn_clicked()
     GT_ClrSts(1);
     GT_ClrSts(2);
     GT_ClrSts(3);
+}
+
+void MainWindow::on_killStopBtn_clicked()
+{
+    emit axis1->moveStop();
+    emit axis2->moveStop();
+    emit axis3->moveStop();
+    GT_Stop(0Xf,0XF);
+}
+
+void MainWindow::on_enableAllBtn_clicked()
+{
+    GT_GetSts(1,&axisStatus1);
+    GT_GetSts(2,&axisStatus2);
+    GT_GetSts(3,&axisStatus3);
+    if(axisStatus1&0x200 && axisStatus2&0x200 && axisStatus3&0x200)
+    {
+        retValue=GT_AxisOff(1);
+        CommandHandler("Axis1 Enable off",retValue);
+        retValue=GT_AxisOff(2);
+        CommandHandler("Axis2 Enable off",retValue);
+        retValue=GT_AxisOff(3);
+        if(!retValue)
+        {
+            ui->enableAllBtn ->setText("Enable");
+        }
+        CommandHandler("Axis3 Enable off",retValue);
+    }
+    else
+    {
+        retValue=GT_AxisOn(1);
+        CommandHandler("Axis1 Enable on",retValue);
+        retValue=GT_AxisOn(2);
+        CommandHandler("Axis2 Enable on",retValue);
+        retValue=GT_AxisOn(3);
+        CommandHandler("Axis3 Enable on",retValue);
+        if(!retValue)
+        {
+            ui->enableAllBtn->setText("Disable");
+        }
+    }
+}
+
+void MainWindow::on_homeAll_clicked()
+{
+    homeThread1=new QThread;
+    home1=new Home;
+    home1->moveToThread(homeThread1);
+
+    connect(axis1,&axis::sHome,home1,&Home::doWorks);
+
+    connect(homeThread1,&QThread::finished,home1,&Home::deleteLater);
+    connect(home1,&Home::destroyed,homeThread1,&QThread::deleteLater);
+    connect(home1,&Home::workFinished,[this](){
+        homeThread1->quit();
+    });
+
+    homeThread1->start();
+
+    homeThread2=new QThread;
+    home2=new Home;
+    home2->moveToThread(homeThread2);
+
+    connect(axis2,&axis::sHome,home2,&Home::doWorks);
+
+    connect(homeThread2,&QThread::finished,home2,&Home::deleteLater);
+    connect(home2,&Home::destroyed,homeThread2,&QThread::deleteLater);
+    connect(home2,&Home::workFinished,[this](){
+        homeThread2->quit();
+    });
+
+    homeThread2->start();
+
+    homeThread3=new QThread;
+    home3=new Home;
+    home3->moveToThread(homeThread3);
+
+    connect(axis3,&axis::sHome,home3,&Home::doWorks);
+
+    connect(homeThread3,&QThread::finished,home3,&Home::deleteLater);
+    connect(home3,&Home::destroyed,homeThread3,&QThread::deleteLater);
+    connect(home3,&Home::workFinished,[this](){
+        homeThread3->quit();
+    });
+
+    homeThread3->start();
+
+    emit axis1->sHome(1);
+    emit axis2->sHome(2);
+    emit axis3->sHome(3);
 }
